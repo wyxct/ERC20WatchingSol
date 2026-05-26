@@ -48,7 +48,7 @@ contract TokenManage is ERC20Upgradeable, OwnableUpgradeable {
     }
 
     function _transfer(address sender, address recipient, uint256 amount) internal override {
-        require(blackList[sender] || blackList[recipient] == false, "Recipient or sender is in black list");
+        require(!blackList[sender] && !blackList[recipient] == false, "Recipient or sender is in black list");
         super._transfer(sender, recipient, amount);
         emit Transfer(sender, recipient, amount);
     }
